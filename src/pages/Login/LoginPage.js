@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 import { tryLogin } from '../../actions';
 
-import FormRow from '../components/FormRow';
+import FormRow from '../../components/FormRow';
 
 class LoginPage extends React.Component {
 	constructor(props) {

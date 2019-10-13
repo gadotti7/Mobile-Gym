@@ -20,9 +20,9 @@ const AppNavigator = createStackNavigator({
   'WorkoutForm': {
       screen: WorkoutFormPage,
       navigationOptions: ({ navigation }) => {
-          if (navigation.state.params && navigation.state.params.serieToEdit) {
+          if (navigation.state.params && navigation.state.params.workoutToEdit) {
               return {
-                  title: navigation.state.params.serieToEdit.title,
+                  title: navigation.state.params.workoutToEdit.name,
               }
           }
           return {
@@ -33,9 +33,9 @@ const AppNavigator = createStackNavigator({
   'WorkoutDetail': {
       screen: WorkoutDetailPage,
       navigationOptions: ({ navigation }) => {
-          const { serie } = navigation.state.params;
+          const { workout } = navigation.state.params;
           return {
-              title: serie.title
+              title: workout.name
           }
       }
   },

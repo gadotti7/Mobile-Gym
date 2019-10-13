@@ -9,7 +9,6 @@ const setWorkout = workout => ({
 
 export const watchWorkout = () => {
 	const { currentUser } = firebase.auth();
-	console.log(currentUser)
 	return dispatch => {
 		firebase
 			.database()
