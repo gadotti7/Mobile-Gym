@@ -1,17 +1,18 @@
-import { createStackNavigator } from 'react-navigation-stack'
-import { createAppContainer } from 'react-navigation'
+import React from 'react';
+import { Image } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
 
 import LoginPage from './pages/LoginPage';
 import WorkoutPage from './pages/WorkoutPage';
 import WorkoutDetailPage from './pages/WorkoutDetailPage';
 import WorkoutFormPage from './pages/WorkoutFormPage';
 
+import logo from './assests/mobileGym.png';
+
 const AppNavigator = createStackNavigator({
   'Login': {
     screen: LoginPage,
-    navigationOptions: {
-        title: 'Login!',
-  }
   },
   'Main': {
       screen: WorkoutPage,
@@ -39,20 +40,14 @@ const AppNavigator = createStackNavigator({
       }
   },
 }, {
-  defaultNavigationOptions: {
-    title: "MobileGym",
-    headerTintColor: 'white',
-    headerStyle:{
-      backgroundColor: '#00a33c',
-      borderBottomWidth: 1,
-      borderBottomColor: '#C5C5C5',
-    },
-    headerTitleStyle: {
-      color: 'white',
-      fontSize: 30,
-      flexGrow: 1,
-    }
-  }
+    headerLayoutPreset: 'center',
+    defaultNavigationOptions: {
+        headerTitle: <Image source={logo} />,
+        headerTintColor: 'white',
+        headerStyle:{
+            backgroundColor: '#F5F5F5',
+        }
+    } 
 });
 
 export default createAppContainer(AppNavigator);

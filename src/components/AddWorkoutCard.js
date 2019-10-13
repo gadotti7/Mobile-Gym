@@ -12,12 +12,11 @@ const AddWorkoutCard = ({ serie, isFirstColumn, onPress }) => (
     <TouchableOpacity 
     onPress={onPress}    
     style={[
-            styles.container,
-            isFirstColumn ? styles.firstColumn : styles.lastColumn
+            styles.container
         ]}>
 		<View style={styles.card}>
             <Image
-                source = {require('../../resources/add.png')}
+                source = {require('../assests/plus.png')}
                 style={styles.image}
             />
         </View>
@@ -32,6 +31,8 @@ const styles = StyleSheet.create({
     },
 	card: {
         flex: 1,
+        borderColor: '#000',
+        borderWidth: 1,
     },
     firstColumn: {
         paddingLeft: 10,

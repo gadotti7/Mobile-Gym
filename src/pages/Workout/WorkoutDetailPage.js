@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { deleteWorkout } from '../actions';
+import { deleteWorkout } from '../../actions';
 
-import Line from '../components/Line';
-import LongText from '../components/LongText';
+import Line from '../../components/Line';
+import LongText from '../../components/LongText';
 
 class WorkoutDetailPage extends React.Component {
 	render() {
@@ -21,19 +21,9 @@ class WorkoutDetailPage extends React.Component {
 
 		return (
 			<ScrollView>
-				{
-					workout.img64
-						?  <Image
-							style={styles.image}
-							source={{
-								uri: `data:image/jpeg;base64,${workout.img64}`
-							}} />
-						: null
-				}
-				<Line label="Título" content={workout.title} />
-				<Line label="Gênero" content={workout.gender} />
-				<Line label="Nota" content={workout.rate} />
-				<LongText label="Descrição" content={workout.description} />
+				<Line label="Nome" content={workout.name} />
+				<LongText label="Detalhes" content={workout.details} />
+				<Line label="Grupo Muscular" content={workout.muscleGroup} />
 
 				<View style={styles.button}>
 					<Button

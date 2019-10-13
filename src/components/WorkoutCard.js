@@ -17,14 +17,10 @@ const WorkoutCard = ({ workout, isFirstColumn, onPress }) => (
         ]}>
 		<View style={styles.card}>
             <Image
-                source = {{
-                    uri: workout.img
-                }}
-                aspectRatio={1}
-                resizeMode="cover"
+                resizeMode="contain"
                 />
             <View style={styles.cardTitleWrapper}>
-                <Text style={styles.cardTitle}>{workout.title}</Text>
+                <Text style={styles.cardTitle}>{workout.name}</Text>
             </View>
         </View>
     </TouchableOpacity>
@@ -38,7 +34,8 @@ const styles = StyleSheet.create({
     },
 	card: {
         flex: 1,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: '#000'
     },
     cardTitleWrapper: {
         backgroundColor: 'black',

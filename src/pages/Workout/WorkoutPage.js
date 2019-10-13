@@ -5,12 +5,11 @@ import {
 	FlatList,
 	ActivityIndicator,
 } from 'react-native';
-import WorkoutCard from '../components/WorkoutCard';
-import AddWorkoutCard from '../components/AddWorkoutCard';
-import { connect } from 'react-redux';
-import { watchWorkout } from '../actions';
 
-const isEven = number => number % 2 === 0;
+import WorkoutCard from '../../components/WorkoutCard';
+import AddWorkoutCard from '../../components/AddWorkoutCard';
+import { connect } from 'react-redux';
+import { watchWorkout } from '../../actions';
 
 class WorkoutPage extends React.Component {
 	componentDidMount() {
@@ -27,19 +26,16 @@ class WorkoutPage extends React.Component {
 			<View>
 				<FlatList
 					data={[...workout, { isLast: true }]}
-					renderItem={({ item, index }) => (
+					keyExtractor={item => String(item.id)}
+					renderItem={({ item }) => (
 						item.isLast
 							? <AddWorkoutCard
-								isFirstColumn={isEven(index)}
 								onPress={() => navigation.navigate('WorkoutForm')} />
 							: <WorkoutCard
 								workout={item}
-								isFirstColumn={isEven(index)}
 								onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
 							/>
 					)}
-					keyExtractor={item => item.id}
-					numColumns={2}
 					ListHeaderComponent={props => (<View style={styles.marginTop} />)}
 					ListFooterComponent={props => (<View style={styles.marginBottom} />)}
 				/>

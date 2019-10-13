@@ -8,7 +8,7 @@ import {
 const INITIAL_STATE = {
 	id: null,
 	name: '',
-	description: '',
+	details: '',
 	muscleGroup: 'Peito',
 
 }

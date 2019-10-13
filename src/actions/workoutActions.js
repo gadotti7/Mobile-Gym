@@ -9,10 +9,11 @@ const setWorkout = workout => ({
 
 export const watchWorkout = () => {
 	const { currentUser } = firebase.auth();
+	console.log(currentUser)
 	return dispatch => {
 		firebase
 			.database()
-			.ref(`/users/${currentUser.uid}/workout`)
+			.ref(`/users/${currentUser.uid}/workouts`)
 			.on('value', snapshot => {
 				const workout = snapshot.val();
 
@@ -26,12 +27,12 @@ export const watchWorkout = () => {
 	}
 }
 
-export const deleteSerie = workout => {
+export const deleteWorkout = workout => {
 	return dispatch => {
 		return new Promise((resolve, reject) => {
 			Alert.alert(
 				'Deletar',
-				`Deseja deletar a workout ${workout.title}`,
+				`Deseja deletar a workout ${workout.name}`,
 				[{
 					text: 'Não',
 					onPress: () => {
@@ -45,7 +46,7 @@ export const deleteSerie = workout => {
 						try {
 							await firebase
 								.database()
-								.ref(`/users/${currentUser.uid}/workout/${workout.id}`)
+								.ref(`/users/${currentUser.uid}/workouts/${workout.id}`)
 								.remove();
 							resolve(true);
 						} catch(e) {
