@@ -11,8 +11,7 @@ import {
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 
-import { tryLogin } from '../actions';
-
+import { tryLogin } from '../../actions';
 
 import FormRow from '../components/FormRow';
 

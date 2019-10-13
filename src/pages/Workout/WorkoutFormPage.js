@@ -21,7 +21,7 @@ import {
 	saveWorkout,
 	setWholeWorkout,
 	resetForm,
-} from '../../actions';
+} from '..//../actions';
 
 import { Permissions, ImagePicker } from 'expo';
 
