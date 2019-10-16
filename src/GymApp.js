@@ -15,7 +15,7 @@ const store = createStore(rootReducer, composeWithDevTools(
 
 const GymApp = prop => (
     <>
-      <StatusBar  barStyle="dark-content" backgroundColor="#F5F5F5" />
+      <StatusBar  barStyle="dark-content" backgroundColor="blue"   />
       <Provider store={store}>
         <Router />
       </Provider>

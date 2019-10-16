@@ -13,6 +13,9 @@ import logo from './assests/mobileGym.png';
 const AppNavigator = createStackNavigator({
   'Login': {
     screen: LoginPage,
+    navigationOptions: {
+        header:null,
+    }
   },
   'Main': {
       screen: WorkoutPage,
@@ -42,7 +45,8 @@ const AppNavigator = createStackNavigator({
 }, {
     headerLayoutPreset: 'center',
     defaultNavigationOptions: {
-        headerTitle: <Image source={logo} />,
+        // headerTitle: <Image source={logo} />,
+        headerTitle: 'Mobile Gym',
         headerTintColor: 'white',
         headerStyle:{
             backgroundColor: '#F5F5F5',

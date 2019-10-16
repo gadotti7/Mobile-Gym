@@ -3,9 +3,20 @@ import {
 	StyleSheet,
 	FlatList,
 	ActivityIndicator,
+	Text,
 } from 'react-native';
 
-import { Container, Post, Header, ImageWorkout, Name, Description } from "./styles";
+import {
+	Container, 
+	Workout,
+	Header,
+	ImageWorkout,
+	Name,
+	Details,
+	AddWorkout,
+	NewWorkout,
+} from "./styles";
+
 import { connect } from 'react-redux';
 import { watchWorkout } from '../../actions';
 
@@ -21,26 +32,29 @@ class WorkoutPage extends React.Component {
 		}
 
 		return (
-<Container>
-		<FlatList
-			key="list"
-			data={[...workout]}
-			keyExtractor={item => String(item.id)}
-			renderItem={({ item }) => (
-			<Post onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}>
-				<Header>
-				<Name>{item.name}</Name>
-				</Header>
+		
+		<Container>
+			<FlatList
+					key="list"
+					data={[...workout]}
+					keyExtractor={item => String(item.id)}
+					renderItem={({ item }) => (
+					<Workout onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}>
+						<Header>
+						<Name>{item.name}</Name>
+						</Header>
 
-				<ImageWorkout source={ require('../../assests/workoutImage.jpeg') } />
-	
-				<Description>
-					{item.details}
-				</Description>
-			</Post>
-			)}
-		/>
-		</Container>
+						<ImageWorkout source={ require('../../assests/workoutImage.jpeg') } />
+			
+						<Details>
+							{item.details}
+						</Details>
+					</Workout>
+					)}
+			/>
+
+
+			</Container>
 		);
 	}
 }

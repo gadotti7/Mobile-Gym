@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-	View,
-	TextInput,
-	Text,
 	StyleSheet,
-	Button,
 	ActivityIndicator,
-	Alert
+	Alert,
+	TextInput,
+	Button,
+	KeyboardAvoidingView,
 } from 'react-native';
+
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 
+import { plus } from "../../assests/plus.png";
 import { tryLogin } from '../../actions';
-
-import FormRow from '../../components/FormRow';
+import {  Container, Logo, Card, Login, Password, ButtonView, ContainerForm} from "./styles";
 
 class LoginPage extends React.Component {
 	constructor(props) {
@@ -48,8 +48,8 @@ class LoginPage extends React.Component {
 
 	tryLogin() {
 		this.setState({ isLoading: true, message: '' });
-		const { mail: email, password } = this.state;
-
+		const { email, password } = this.state;
+		console.log(email)
 		this.props.tryLogin({ email, password })
 			.then(user => {
 				if (user)
@@ -97,49 +97,57 @@ class LoginPage extends React.Component {
 		if (this.state.isLoading)
 			return <ActivityIndicator />;
 		return (
-			<Button
+			<Button style={styles.button}
 				title="Entrar"
-				color= '#00a33c'
+				color= '#ff0048'
 				onPress={() => this.tryLogin()}/>
 		);
 	}
 
 	render() {
 		return (
-			<View style={styles.container}>
-				<FormRow first>
-					<TextInput
-						style={styles.input}
-						placeholder="user@mail.com"
-						value={this.state.mail}
-						onChangeText={value => this.onChangeHandler('mail', value)}
-						keyboardType="email-address"
-						autoCapitalize="none"
-					 />
-				</FormRow>
-				<FormRow last>
-					<TextInput
-						style={styles.input}
-						placeholder="******"
-						secureTextEntry
-						value={this.state.password}
-						onChangeText={value => this.onChangeHandler('password', value)}
-					/>
-				</FormRow>
+			<KeyboardAvoidingView
+				keyboardVerticalOffset={1}
+				behavior="padding"
+				enabled>
+				<Container>
+					<Logo 	source={require('../../assests/mobileGym.png') }/>
+					
+					<Card>
+						<ContainerForm>
+							<Login>
+								<TextInput style={  styles.input }
+									placeholder="user@email.com" 
+									value={this.state.email}  
+									onChangeText={ value => this.onChangeHandler('email',value)}
+									keyboardType="email-address"
+									autoCapitalize="none"
+								/>
+							</Login>
+						
+							<Password>
+								<TextInput style={styles.input}
+									placeholder="*******"
+									secureTextEntry
+									value={this.state.password}
+									onChangeText={ value => this.onChangeHandler('password',value)}
+								/>
+							</Password>
 
-				{ this.renderButton() }
-			</View>
+						</ContainerForm>
+						<ButtonView>
+							{ this.renderButton() }
+						</ButtonView>
+					</Card>
+				</Container>
+			</KeyboardAvoidingView>
 		)
 	}
 }
 
 const styles = StyleSheet.create({
-	container: {
-		paddingLeft: 10,
-		paddingRight: 10,
-	},
 	input: {
-		paddingLeft: 5,
+		paddingLeft: 10,
 		paddingRight: 5,
 		paddingBottom: 5,
 		borderRadius: 20,
