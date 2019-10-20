@@ -49,7 +49,7 @@ const AppNavigator = createStackNavigator({
         headerTitle: 'Mobile Gym',
         headerTintColor: 'white',
         headerStyle:{
-            backgroundColor: '#F5F5F5',
+            backgroundColor: '#ff0048',
         }
     } 
 });

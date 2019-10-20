@@ -3,7 +3,6 @@ import {
 	StyleSheet,
 	FlatList,
 	ActivityIndicator,
-	Text,
 } from 'react-native';
 
 import {
@@ -32,10 +31,11 @@ class WorkoutPage extends React.Component {
 		}
 
 		return (
-		
-		<Container>
+			<Container>
+			<AddWorkout  onPress={() => navigation.navigate('WorkoutForm')}>
+				<NewWorkout>Adicionar Novo Treino</NewWorkout>	
+			</AddWorkout>
 			<FlatList
-					key="list"
 					data={[...workout]}
 					keyExtractor={item => String(item.id)}
 					renderItem={({ item }) => (
@@ -52,8 +52,6 @@ class WorkoutPage extends React.Component {
 					</Workout>
 					)}
 			/>
-
-
 			</Container>
 		);
 	}
