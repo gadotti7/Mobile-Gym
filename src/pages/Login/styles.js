@@ -6,12 +6,15 @@ export const Container = styled.ScrollView`
 `;
 
 export const Logo = styled.Image`
-    margin-top: 20%;
-    margin-left: 35%;
+    margin-top: 10%;
+    margin-left: 27%;
+    aspect-ratio: 1;
+    position: relative;
+    height: 20%;
 `;
 
 export const Card = styled.View`
-    background: #FFF;
+    background: #f0f0f0;
     border-radius: 20px;
     margin-top: 10%;
     margin-left: 30px;

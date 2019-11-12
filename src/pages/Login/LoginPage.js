@@ -111,7 +111,7 @@ class LoginPage extends React.Component {
 				behavior="padding"
 				enabled>
 				<Container>
-					<Logo 	source={require('../../assests/mobileGym.png') }/>
+					<Logo 	source={require('../../assests/mobileGym3.png') }/>
 					
 					<Card>
 						<ContainerForm>

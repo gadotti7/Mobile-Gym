@@ -3,6 +3,7 @@ import {
 	StyleSheet,
 	FlatList,
 	ActivityIndicator,
+	View,
 } from 'react-native';
 
 import {
@@ -16,8 +17,15 @@ import {
 	NewWorkout,
 } from "./styles";
 
+import WorkoutCard from '../../components/WorkoutCard';
+import AddWorkoutCard from '../../components/AddWorkoutCard';
+
+import { FloatingAction } from "react-native-floating-action";
+
 import { connect } from 'react-redux';
 import { watchWorkout } from '../../actions';
+
+const isEven = number => number % 2 === 0;
 
 class WorkoutPage extends React.Component {
 	componentDidMount() {
@@ -31,28 +39,26 @@ class WorkoutPage extends React.Component {
 		}
 
 		return (
-			<Container>
-			<AddWorkout  onPress={() => navigation.navigate('WorkoutForm')}>
-				<NewWorkout>Adicionar Novo Treino</NewWorkout>	
-			</AddWorkout>
+		<View>
 			<FlatList
-					data={[...workout]}
-					keyExtractor={item => String(item.id)}
-					renderItem={({ item }) => (
-					<Workout onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}>
-						<Header>
-						<Name>{item.name}</Name>
-						</Header>
-
-						<ImageWorkout source={ require('../../assests/workoutImage.jpeg') } />
-			
-						<Details>
-							{item.details}
-						</Details>
-					</Workout>
-					)}
+				data={[...workout, { isLast: true }]}
+				renderItem={({ item, index }) => (
+					<WorkoutCard
+						workout={item}
+							isFirstColumn={isEven(index)}
+							onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
+						/>
+				)}
+				keyExtractor={item => item.id}
+				numColumns={2}
+				ListHeaderComponent={props => (<View style={styles.marginTop} />)}
+				ListFooterComponent={props => (<View style={styles.marginBottom} />)}
 			/>
-			</Container>
+
+			<FloatingAction
+				// onPress={() => navigation.navigate('WorkoutForm')} />
+			/>
+		</View>
 		);
 	}
 }

@@ -8,6 +8,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+
+
 const WorkoutCard = ({ workout, isFirstColumn, onPress }) => (
     <TouchableOpacity 
     onPress={onPress}    
@@ -17,11 +19,14 @@ const WorkoutCard = ({ workout, isFirstColumn, onPress }) => (
         ]}>
 		<View style={styles.card}>
             <Image
-                resizeMode="contain"
-                />
+                style={{width: '100%', height: '100%'}}
+                source={ require('../assests/workoutImage.jpeg') } 
+                resizeMode="stretch"
+            />
             <View style={styles.cardTitleWrapper}>
                 <Text style={styles.cardTitle}>{workout.name}</Text>
             </View>
+
         </View>
     </TouchableOpacity>
 );
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
 	card: {
         flex: 1,
         borderWidth: 1,
-        borderColor: '#000'
+        borderColor: '#f0f0f0'
     },
     cardTitleWrapper: {
         backgroundColor: 'black',
