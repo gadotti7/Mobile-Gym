@@ -8,11 +8,12 @@ import {
 	Button,
 } from 'react-native';
 
+import { FloatingAction } from "react-native-floating-action";
+
 import { connect } from 'react-redux';
 import { deleteWorkout } from '../../actions';
 
-import Line from '../../components/Line';
-import LongText from '../../components/LongText';
+import { Card,Title,Description} from "./styles";
 
 class WorkoutDetailPage extends React.Component {
 	render() {
@@ -21,19 +22,31 @@ class WorkoutDetailPage extends React.Component {
 
 		return (
 			<ScrollView>
-				<Line label="Nome" content={workout.name} />
-				<LongText label="Detalhes" content={workout.details} />
-				<Line label="Grupo Muscular" content={workout.muscleGroup} />
+				
+				<Card>
+					<Title>{workout.name}</Title>
+					<Description>{workout.details} </Description>
+					<FloatingAction
+						color="#ff0048"
+						showBackground={false}
+					/> 
 
-				<View style={styles.button}>
+				</Card>
+
+
+				{/* <Line label="Nome" content={workout.name} />
+				<LongText label="Detalhes" content={workout.details} />
+				<Line label="Grupo Muscular" content={workout.muscleGroup} /> */}
+
+				{/* <View style={styles.button}>
 					<Button
 						title="Editar"
 						onPress={() => {
 							navigation.replace('WorkoutForm', { workoutToEdit: workout })
 						}} />
-				</View>
+				</View> */}
 
-				<View style={styles.button}>
+				{/* <View style={styles.button}>
 					<Button
 						title="Deletar"
 						color="#FF0004FF"
@@ -43,7 +56,7 @@ class WorkoutDetailPage extends React.Component {
 								navigation.goBack();
 							}
 						}} />
-				</View>
+				</View> */}
 			</ScrollView>
 		)
 	}

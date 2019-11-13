@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 
         position: 'absolute',
         bottom: 0,
-        opacity: .8,
+        opacity: .7,
         width: '100%',
         
         paddingTop: 10,

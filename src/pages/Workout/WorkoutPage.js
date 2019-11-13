@@ -18,15 +18,20 @@ import {
 } from "./styles";
 
 import WorkoutCard from '../../components/WorkoutCard';
-import AddWorkoutCard from '../../components/AddWorkoutCard';
 
 import { FloatingAction } from "react-native-floating-action";
 
 import { connect } from 'react-redux';
 import { watchWorkout } from '../../actions';
 
-const isEven = number => number % 2 === 0;
-
+const actions = [
+	{
+	  text: "Treino",
+	  icon: require("../../assests/plus.png"),
+	  name: "bt_workout",
+	  position: 2
+	},
+  ];
 class WorkoutPage extends React.Component {
 	componentDidMount() {
 		this.props.watchWorkout();
@@ -41,11 +46,10 @@ class WorkoutPage extends React.Component {
 		return (
 		<View>
 			<FlatList
-				data={[...workout, { isLast: true }]}
+				data={[...workout]}
 				renderItem={({ item, index }) => (
 					<WorkoutCard
 						workout={item}
-							isFirstColumn={isEven(index)}
 							onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
 						/>
 				)}
@@ -56,8 +60,13 @@ class WorkoutPage extends React.Component {
 			/>
 
 			<FloatingAction
-				// onPress={() => navigation.navigate('WorkoutForm')} />
-			/>
+				color="#ff0048"
+				showBackground={false}
+				actions={actions}
+				onPressItem={name => {
+					navigation.navigate('WorkoutForm')
+				}}
+			/> 
 		</View>
 		);
 	}

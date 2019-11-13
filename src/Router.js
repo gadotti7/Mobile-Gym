@@ -45,7 +45,6 @@ const AppNavigator = createStackNavigator({
 }, {
     headerLayoutPreset: 'center',
     defaultNavigationOptions: {
-        // headerTitle: <Image source={logo} />,
         headerTitle: 'Mobile Gym',
         headerTintColor: 'white',
         headerStyle:{
