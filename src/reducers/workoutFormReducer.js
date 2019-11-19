@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 	name: '',
 	details: '',
 	muscleGroup: 'Peito',
-
+	exercices: '',
 }
 
 export default function(state = INITIAL_STATE, action) {

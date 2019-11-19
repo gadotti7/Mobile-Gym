@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { watchUser } from '../actions';
+import { watchUser } from '../../actions';
 
 const isEven = number => number % 2 === 0;
 

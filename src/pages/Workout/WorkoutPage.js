@@ -51,6 +51,8 @@ class WorkoutPage extends React.Component {
 					<WorkoutCard
 						workout={item}
 							onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
+							// TODO colocar pra excluir 
+							//onLongPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
 						/>
 				)}
 				keyExtractor={item => item.id}

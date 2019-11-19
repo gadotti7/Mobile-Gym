@@ -22,9 +22,7 @@ import {
 	saveUser,
 	setWholeUser,
 	resetForm,
-} from '..//../actions';
-
-import { Permissions, ImagePicker } from 'expo';
+} from '../../actions';
 
 class UserFormPage extends React.Component {
 	constructor(props) {
@@ -68,10 +66,6 @@ class UserFormPage extends React.Component {
 	}
 
     async pickImage() {
-		const { status } = await Permissions.askAsync(
-			Permissions.CAMERA_ROLL,
-			Permissions.CAMERA
-        );
         
 		const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
 		if (status !== 'granted') {

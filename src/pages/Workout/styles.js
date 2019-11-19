@@ -68,11 +68,15 @@ export const Title = styled.Text`
   margin-top: 10px;
   font-weight: bold;
   font-size: 24px;
-  margin-left: 40%;
+  margin-left: 35%;
 `;
 
 export const Description = styled.Text`
   margin-top: 10px;
   font-size: 16px;
   margin-left: 5%;
+`;
+
+export const Exercicies = styled.ScrollView`
+  
 `;
