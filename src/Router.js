@@ -7,8 +7,8 @@ import LoginPage from './pages/Login/LoginPage';
 import WorkoutPage from './pages/Workout/WorkoutPage';
 import WorkoutDetailPage from './pages/Workout/WorkoutDetailPage';
 import WorkoutFormPage from './pages/Workout/WorkoutFormPage';
-
-import logo from './assests/mobileGym.png';
+import UserFormPage from './pages/User/UserFormPage';
+import UserPage from './pages/User/UserPage';
 
 const AppNavigator = createStackNavigator({
   'Login': {
@@ -41,6 +41,12 @@ const AppNavigator = createStackNavigator({
               title: workout.name
           }
       }
+  },
+  'User': {
+      screen: UserPage,
+  },
+  'UserForm': {
+        screen: UserFormPage,
   },
 }, {
     headerLayoutPreset: 'center',

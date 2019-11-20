@@ -1,11 +1,9 @@
-import { USER_LOGIN_SUCCESS, USER_LOGOUT } from '../actions';
+import { SET_USER } from '../actions';
 
-export default function userReducer(state = null, action) {
+export default function(state = null, action) {
 	switch (action.type) {
-		case USER_LOGIN_SUCCESS:
+		case SET_USER:
 			return action.user;
-		case USER_LOGOUT:
-			return null;
 		default:
 			return state;
 	}

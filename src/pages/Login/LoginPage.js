@@ -11,7 +11,6 @@ import {
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 
-import { plus } from "../../assests/plus.png";
 import { tryLogin } from '../../actions';
 import {  Container, Logo, Card, Login, Password, ButtonView, ContainerForm} from "./styles";
 
@@ -49,7 +48,6 @@ class LoginPage extends React.Component {
 	tryLogin() {
 		this.setState({ isLoading: true, message: '' });
 		const { email, password } = this.state;
-		console.log(email)
 		this.props.tryLogin({ email, password })
 			.then(user => {
 				if (user)

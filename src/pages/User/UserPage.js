@@ -1,48 +1,64 @@
 import React from 'react';
 import {
 	StyleSheet,
-	View,
 	FlatList,
 	ActivityIndicator,
+	View,
 } from 'react-native';
+
+import WorkoutCard from '../../components/WorkoutCard';
+
+import { FloatingAction } from "react-native-floating-action";
 
 import { connect } from 'react-redux';
 import { watchUser } from '../../actions';
 
-const isEven = number => number % 2 === 0;
-
+const actions = [
+	{
+	  text: "Treino",
+	  icon: require("../../assests/plus.png"),
+	  name: "bt_workout",
+	  position: 2
+	},
+  ];
 class UserPage extends React.Component {
 	componentDidMount() {
 		this.props.watchUser();
 	}
 
 	render() {
-		const { users, navigation } = this.props;
-		if (users === null) {
+		const { user, navigation } = this.props;
+		if (user === null) {
 			return <ActivityIndicator />;
 		}
 
 		return (
-			<View>
-				<FlatList
-					data={[...users, { isLast: true }]}
-					renderItem={({ item, index }) => (
-						item.isLast
-							? <AddSerieCard
-								isFirstColumn={isEven(index)}
-								onPress={() => navigation.navigate('UserForm')} />
-							: <SerieCard
-								user={item}
-								isFirstColumn={isEven(index)}
-								onPress={() => navigation.navigate('UserDetail', { user: item })}
-							/>
-					)}
-					keyExtractor={item => item.id}
-					numColumns={2}
-					ListHeaderComponent={props => (<View style={styles.marginTop} />)}
-					ListFooterComponent={props => (<View style={styles.marginBottom} />)}
-				/>
-			</View>
+		<View>
+			<FlatList
+				data={[...user]}
+				renderItem={({ item, index }) => (
+					<WorkoutCard
+                            user={item}
+							onPress={() => navigation.navigate('UserDetail', { user: item })}
+							// TODO colocar pra excluir 
+							//onLongPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
+						/>
+				)}
+				keyExtractor={item => item.id}
+				numColumns={2}
+				ListHeaderComponent={props => (<View style={styles.marginTop} />)}
+				ListFooterComponent={props => (<View style={styles.marginBottom} />)}
+			/>
+
+			<FloatingAction
+				color="#ff0048"
+				showBackground={false}
+				actions={actions}
+				onPressItem={name => {
+					navigation.navigate('UserForm')
+				}}
+			/> 
+		</View>
 		);
 	}
 }
@@ -57,16 +73,15 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-	const { users } = state;
-	if (users === null) {
-		return { users }
+	const { user } = state;
+	if (user === null) {
+		return { user }
 	}
-
-	const keys = Object.keys(users);
-	const usersWithKeys = keys.map(id => {
-		return { ...users[id], id }
+	const keys = Object.keys(user);
+	const userWithKeys = keys.map(id => {
+		return { ...user[id], id }
 	});
-	return { users: usersWithKeys };
+	return { user: userWithKeys };
 }
 
 export default connect(

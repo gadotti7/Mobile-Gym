@@ -1,9 +1,9 @@
 import firebase from 'firebase';
 
 export const SET_WHOLE_USER = 'SET_WHOLE_USER';
-export const setWholeWorkout = user => ({
+export const setWholeUser = user => ({
 	type: SET_WHOLE_USER,
-	user
+	user,
 });
 
 export const SET_FIELD = 'SET_FIELD';

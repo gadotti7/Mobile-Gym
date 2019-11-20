@@ -6,17 +6,6 @@ import {
 	View,
 } from 'react-native';
 
-import {
-	Container, 
-	Workout,
-	Header,
-	ImageWorkout,
-	Name,
-	Details,
-	AddWorkout,
-	NewWorkout,
-} from "./styles";
-
 import WorkoutCard from '../../components/WorkoutCard';
 
 import { FloatingAction } from "react-native-floating-action";
@@ -31,6 +20,12 @@ const actions = [
 	  name: "bt_workout",
 	  position: 2
 	},
+	{
+		text: "Usuários",
+		icon: require("../../assests/plus.png"),
+		name: "bt_users",
+		position: 3
+	  },
   ];
 class WorkoutPage extends React.Component {
 	componentDidMount() {
@@ -66,7 +61,9 @@ class WorkoutPage extends React.Component {
 				showBackground={false}
 				actions={actions}
 				onPressItem={name => {
-					navigation.navigate('WorkoutForm')
+					console.log(name)
+					if  (name === 'bt_workout')  return navigation.navigate('WorkoutForm')
+					if  (name === 'bt_users')  return navigation.navigate('User')
 				}}
 			/> 
 		</View>

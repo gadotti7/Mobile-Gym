@@ -1,8 +1,11 @@
 import React from 'react';
 import {
 	StyleSheet,
+	View,
+	Text,
 	TextInput,
 	Picker,
+	Slider,
 	Button,
 	ScrollView,
 	KeyboardAvoidingView,
@@ -12,17 +15,15 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions'
-
 import FormRow from '../../components/FormRow';
-
 import {
 	setField,
 	saveUser,
 	setWholeUser,
 	resetForm,
-} from '../../actions';
+} from '..//../actions';
+
+import { Permissions, ImagePicker } from 'expo';
 
 class UserFormPage extends React.Component {
 	constructor(props) {
@@ -36,8 +37,8 @@ class UserFormPage extends React.Component {
 	componentDidMount() {
 		const { navigation, setWholeUser, resetForm } = this.props;
 		const { params } = navigation.state;
-		if (params && params.workoutToEdit) {
-			return setWholeUser(params.workoutToEdit);
+		if (params && params.userToEdit) {
+			return setWholeUser(params.userToEdit);
 		}
 		return resetForm();
 	}
@@ -65,27 +66,6 @@ class UserFormPage extends React.Component {
 			);
 	}
 
-    async pickImage() {
-        
-		const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
-		if (status !== 'granted') {
-			Alert.alert('Você precisa permitir o acesso!');
-			return;
-        }
-        
-		const result = await ImagePicker.launchImageLibraryAsync({
-			quality: 0.2,
-			base64: true,
-			allowsEditing: true,
-			aspect: [1, 1],
-		});
-
-		if (!result.cancelled) {
-			this.props.setField('img64', result.base64);
-		}
-	}
-
-
 	render() {
 		const {
 			userForm,
@@ -105,60 +85,46 @@ class UserFormPage extends React.Component {
                     <FormRow first>
                         <TextInput
                             style={styles.input}
-                            placeholder="Nome Completo" 
+                            placeholder="Nome Treino" 
                             value={userForm.name}
                             onChangeText={value => setField('name', value)}
                         />
                     </FormRow>
                 
-                    {/* E-mail */}
-                    <FormRow>
+                    {/* Details */}
+                    <FormRow last>
                         <TextInput
                             style={styles.input}
-                            placeholder="E-mail" 
-                            value={userForm.email}
-                            onChangeText={value => setField('email', value)}
+                            placeholder="Detalhes" 
+                            value={userForm.details}
+                            onChangeText={value => setField('details', value)}
                             numberOfLines={4}
                             multiline={true}
                         />
                     </FormRow>
                 
-                       {/* Senha */}
-                       <FormRow>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Senha" 
-                            value={userForm.password}
-                            onChangeText={value => setField('password', value)}
-                            numberOfLines={4}
-                            multiline={true}
-                        />
-                    </FormRow>
-
-                    <FormRow>
-						{ serieForm.img64
-							? <Image
-								source={{
-									uri: `data:image/jpeg;base64,${serieForm.img64}`
-								}}
-								style={styles.img} />
-							: null }
-
-						<Button
-							title="Selecione uma imagem"
-							onPress={() => this.pickImage()} />
-					</FormRow>
-
-                    {/* Tipo Aluno */}
+                    {/* COMBO */}
                     <FormRow last>
                         <Picker
-                            selectedValue={userForm.userType}
+                            selectedValue={userForm.muscleGroup}
                             onValueChange={ itemValue => {
-                                setField('userType', itemValue)
+                                setField('muscleGroup', itemValue)
                             }}>
         
-                            <Picker.Item label="Funcionário" value="Funcionário" />
-                            <Picker.Item label="Aluno" value="Aluno" />
+                            <Picker.Item label="Peito"        value="Peito" />
+                            <Picker.Item label="Costas"       value="Costas" />
+                            <Picker.Item label="Ombro"        value="Ombro" />
+                            <Picker.Item label="Biceps"       value="Biceps" />
+                            <Picker.Item label="Triceps"      value="Triceps" />
+                            <Picker.Item label="Antebraço"    value="Antebraço" />
+                            <Picker.Item label="Abdômen"      value="Abdômen" />
+                            <Picker.Item label="Quadríceps"   value="Quadríceps" />
+                            <Picker.Item label="Adutores"     value="Adutores" />
+                            <Picker.Item label="Abdutores"    value="Abdutores" />
+                            <Picker.Item label="Glúteos"      value="Glúteos" />
+                            <Picker.Item label="Posteriores"  value="Posteriores" />
+                            <Picker.Item label="Panturrilhas" value="Panturrilhas" />
+                            <Picker.Item label="Cardio"       value="Cardio" />
                             
                         </Picker>
                     </FormRow>
