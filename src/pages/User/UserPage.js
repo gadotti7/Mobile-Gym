@@ -15,9 +15,9 @@ import { watchUser } from '../../actions';
 
 const actions = [
 	{
-	  text: "Treino",
+	  text: "Usuário",
 	  icon: require("../../assests/plus.png"),
-	  name: "bt_workout",
+	  name: "bt_user",
 	  position: 2
 	},
   ];
@@ -33,23 +33,7 @@ class UserPage extends React.Component {
 		}
 
 		return (
-		<View>
-			<FlatList
-				data={[...user]}
-				renderItem={({ item, index }) => (
-					<WorkoutCard
-                            user={item}
-							onPress={() => navigation.navigate('UserDetail', { user: item })}
-							// TODO colocar pra excluir 
-							//onLongPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
-						/>
-				)}
-				keyExtractor={item => item.id}
-				numColumns={2}
-				ListHeaderComponent={props => (<View style={styles.marginTop} />)}
-				ListFooterComponent={props => (<View style={styles.marginBottom} />)}
-			/>
-
+		<View style={  styles.view }>
 			<FloatingAction
 				color="#ff0048"
 				showBackground={false}
@@ -69,6 +53,10 @@ const styles = StyleSheet.create({
 	},
 	marginBottom: {
 		marginBottom: 5,
+	},
+	view: {
+		width: '100%',
+		height: '100%',
 	}
 })
 

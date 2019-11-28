@@ -42,7 +42,7 @@ class WorkoutPage extends React.Component {
 		<View>
 			<FlatList
 				data={[...workout]}
-				renderItem={({ item, index }) => (
+				renderItem={({ item }) => (
 					<WorkoutCard
 						workout={item}
 							onPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
@@ -61,9 +61,7 @@ class WorkoutPage extends React.Component {
 				showBackground={false}
 				actions={actions}
 				onPressItem={name => {
-					console.log(name)
-					if  (name === 'bt_workout')  return navigation.navigate('WorkoutForm')
-					if  (name === 'bt_users')  return navigation.navigate('User')
+					navigation.navigate('UserForm')
 				}}
 			/> 
 		</View>

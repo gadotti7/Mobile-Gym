@@ -15,15 +15,18 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import firebase from 'firebase';
+
 import FormRow from '../../components/FormRow';
 import {
 	setField,
 	saveUser,
 	setWholeUser,
 	resetForm,
-} from '..//../actions';
+} from '../../actions';
 
-import { Permissions, ImagePicker } from 'expo';
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
 
 class UserFormPage extends React.Component {
 	constructor(props) {
@@ -66,6 +69,30 @@ class UserFormPage extends React.Component {
 			);
 	}
 
+	async pickImage() {
+		const { status } = await Permissions.askAsync(
+			Permissions.CAMERA_ROLL,
+			Permissions.CAMERA
+		);
+
+		if (status !== 'granted') {
+			Alert.alert('Você precisa permitir o acesso!');
+			return;
+		}
+
+		const result = await ImagePicker.launchCameraAsync({
+			quality: 0.2,
+			base64: true,
+			allowsEditing: true,
+			aspect: [1, 1], // Android only
+		});
+
+		if (!result.cancelled) {
+			this.props.setField('img64', result.base64);
+		}
+
+	}
+
 	render() {
 		const {
 			userForm,
@@ -85,47 +112,60 @@ class UserFormPage extends React.Component {
                     <FormRow first>
                         <TextInput
                             style={styles.input}
-                            placeholder="Nome Treino" 
+                            placeholder="Nome Completo" 
                             value={userForm.name}
                             onChangeText={value => setField('name', value)}
                         />
                     </FormRow>
                 
                     {/* Details */}
-                    <FormRow last>
+                    <FormRow>
                         <TextInput
                             style={styles.input}
-                            placeholder="Detalhes" 
-                            value={userForm.details}
-                            onChangeText={value => setField('details', value)}
-                            numberOfLines={4}
-                            multiline={true}
+                            placeholder="E-mail" 
+                            value={userForm.email}
+							onChangeText={value => setField('email', value)}
+							keyboardType="email-address"
+							autoCapitalize="none"
                         />
                     </FormRow>
-                
+
+					<FormRow>
+                        <TextInput
+							style={styles.input}
+							placeholder="Senha"
+							secureTextEntry
+                            value={userForm.password}
+                            onChangeText={value => setField('password', value)}
+
+                        />
+                    </FormRow>
+
+					<FormRow>
+						{ userForm.img64
+							? <Image
+								source={{
+									uri: `data:image/jpeg;base64,${userForm.img64}`
+								}}
+								style={styles.img} />
+							: null }
+
+						<Button
+							title="Selecione uma imagem"
+							onPress={() => this.pickImage()} />
+					</FormRow>
+
                     {/* COMBO */}
                     <FormRow last>
                         <Picker
-                            selectedValue={userForm.muscleGroup}
+                            selectedValue={userForm.userType}
                             onValueChange={ itemValue => {
-                                setField('muscleGroup', itemValue)
+                                setField('userType', itemValue)
                             }}>
         
-                            <Picker.Item label="Peito"        value="Peito" />
-                            <Picker.Item label="Costas"       value="Costas" />
-                            <Picker.Item label="Ombro"        value="Ombro" />
-                            <Picker.Item label="Biceps"       value="Biceps" />
-                            <Picker.Item label="Triceps"      value="Triceps" />
-                            <Picker.Item label="Antebraço"    value="Antebraço" />
-                            <Picker.Item label="Abdômen"      value="Abdômen" />
-                            <Picker.Item label="Quadríceps"   value="Quadríceps" />
-                            <Picker.Item label="Adutores"     value="Adutores" />
-                            <Picker.Item label="Abdutores"    value="Abdutores" />
-                            <Picker.Item label="Glúteos"      value="Glúteos" />
-                            <Picker.Item label="Posteriores"  value="Posteriores" />
-                            <Picker.Item label="Panturrilhas" value="Panturrilhas" />
-                            <Picker.Item label="Cardio"       value="Cardio" />
-                            
+                            <Picker.Item label="Aluno"        value="Aluno" />
+                            <Picker.Item label="Funcionário"       value="Funcionário" />
+
                         </Picker>
                     </FormRow>
 
