@@ -25,15 +25,14 @@ export const resetForm = () => ({
 	type: RESET_FORM
 });
 
-export const saveWorkout = workout => {
-	const { currentUser } = firebase.auth();
+export const saveWorkout = (workout, userID) => {
 	return async dispatch => {
 		const db = firebase.database();
 		if (workout.id) {
-			await db.ref(`/users/${currentUser.uid}/workouts/${workout.id}`)
+			await db.ref(`/users/${userID}/workouts/${workout.id}`)
 				.set(workout);
 		} else {
-			await db.ref(`/users/${currentUser.uid}/workouts`)
+			await db.ref(`/users/${userID}/workouts`)
 				.push(workout);
 		}
 		dispatch(workoutSavedSuccess())

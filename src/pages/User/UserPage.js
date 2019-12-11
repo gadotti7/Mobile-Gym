@@ -6,7 +6,7 @@ import {
 	View,
 } from 'react-native';
 
-import WorkoutCard from '../../components/WorkoutCard';
+import UserCard from '../../components/UserCard';
 
 import { FloatingAction } from "react-native-floating-action";
 
@@ -34,6 +34,20 @@ class UserPage extends React.Component {
 
 		return (
 		<View style={  styles.view }>
+				<FlatList
+					data={[...user]}
+					renderItem={({ item }) => (
+						<UserCard
+							user={item}
+								onPress={() => navigation.navigate('UserDetail', { user: item })}
+							/>
+					)}
+					keyExtractor={item => item.id}
+					numColumns={2}
+					ListHeaderComponent={props => (<View style={styles.marginTop} />)}
+					ListFooterComponent={props => (<View style={styles.marginBottom} />)}
+				/>
+
 			<FloatingAction
 				color="#ff0048"
 				showBackground={false}

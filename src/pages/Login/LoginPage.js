@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
 		super(props);
 
 		this.state = {
-			mail: '',
+			email: '',
 			password: '',
 			isLoading: false,
 			message: ''
@@ -48,8 +48,10 @@ class LoginPage extends React.Component {
 	tryLogin() {
 		this.setState({ isLoading: true, message: '' });
 		const { email, password } = this.state;
+		
 		this.props.tryLogin({ email, password })
 			.then(user => {
+				
 				if (user)
 					return this.props.navigation.replace('User');
 
@@ -65,7 +67,7 @@ class LoginPage extends React.Component {
 				});
 			});
 	}
-
+	
 	getMessageByErrorCode(errorCode) {
 		switch(errorCode){
             case 'auth/wrong-password':

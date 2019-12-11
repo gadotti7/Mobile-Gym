@@ -1,11 +1,8 @@
 import React from 'react';
 import {
 	StyleSheet,
-	View,
-	Text,
 	TextInput,
 	Picker,
-	Slider,
 	Button,
 	ScrollView,
 	KeyboardAvoidingView,
@@ -14,8 +11,6 @@ import {
 	Image,
 } from 'react-native';
 import { connect } from 'react-redux';
-
-import firebase from 'firebase';
 
 import FormRow from '../../components/FormRow';
 import {
@@ -57,8 +52,9 @@ class UserFormPage extends React.Component {
 				onPress={async () => {
 					this.setState({ isLoading: true });
 					try {
-						const { saveUser, userForm, navigation } = this.props;
-						await saveUser(userForm);
+						const { saveUser, userForm, navigation } = this.props; 
+						await  saveUser(userForm);
+						this.setState({ isLoading: false });
 						navigation.goBack();
 					} catch (error) {
 						Alert.alert('Erro!', error.message);

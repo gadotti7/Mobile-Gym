@@ -19,8 +19,8 @@ const WorkoutCard = ({ workout, isFirstColumn, onPress }) => (
         ]}>
 		<View style={styles.card}>
             <Image
-                style={{width: '100%', height: '100%'}}
-                source={ require('../assests/workoutImage.jpeg') } 
+                style={{flex: 1 ,width: null, height: null}}
+                source={ require('../assests/imageWorkout.png') } 
                 resizeMode="stretch"
             />
             <View style={styles.cardTitleWrapper}>

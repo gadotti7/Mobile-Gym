@@ -1,65 +1,97 @@
 import React from 'react';
-import {
-	StyleSheet,
-	ScrollView,
-	View,
-	Text,
-	Image,
-	Button,
-} from 'react-native';
+import { FlatList, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
 
+import { watchWorkoutUser } from '../../actions';
 import { FloatingAction } from "react-native-floating-action";
 
-import { connect } from 'react-redux';
-import { deleteUser } from '../../actions';
+import WorkoutCard from '../../components/WorkoutCard';
 
-import { Card,Title,Description} from "./styles";
+import { Card,Title} from "./styles";
+
+const actions = [
+	{
+	  text: "Treino",
+	  icon: require("../../assests/plus.png"),
+	  name: "bt_workout",
+	  position: 1
+	},
+  ];
 
 class UserDetailPage extends React.Component {
+	componentDidMount() {
+		const { navigation } = this.props;
+		const { user } = navigation.state.params;
+		this.props.watchWorkoutUser(user);
+	}
+
 	render() {
 		const { navigation } = this.props;
 		const { user } = navigation.state.params;
-
+	
+		const { workout } = this.props;
+		if (workout === null) {
+			return <ActivityIndicator />;
+		}
 		return (
-			<ScrollView>
-				
+			<View style={  styles.view }>
 				<Card>
 					<Title>{user.name}</Title>
-					<Description>{user.details} </Description>
-					<FloatingAction
-						color="#ff0048"
-						showBackground={false}
-					/> 
-
 				</Card>
 
+				<FlatList
+					data={[...workout]}
+					renderItem={({ item }) => (
+						<WorkoutCard
+							workout={item}
+								onPress={() => navigation.navigate('WorkoutDetailAdm', { workout: item, user })}
+								// TODO colocar pra excluir 
+								//onLongPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
+							/>
+					)}
+					keyExtractor={item => item.id}
+					numColumns={2}
+					ListHeaderComponent={props => (<View style={styles.marginTop} />)}
+					ListFooterComponent={props => (<View style={styles.marginBottom} />)}
+			/>
 
-				{/* <Line label="Nome" content={user.name} />
-				<LongText label="Detalhes" content={user.details} />
-				<Line label="Grupo Muscular" content={user.muscleGroup} /> */}
+				<FloatingAction
+					color="#ff0048"
+					showBackground={false}
+					actions={actions}
+					onPressItem={name => {
+						this.props.navigation.navigate('WorkoutForm', user);
+					}}
+				/>
 
-				{/* <View style={styles.button}>
-					<Button
-						title="Editar"
-						onPress={() => {
-							navigation.replace('userForm', { userToEdit: user })
-						}} />
-				</View> */}
-
-				{/* <View style={styles.button}>
-					<Button
-						title="Deletar"
-						color="#FF0004FF"
-						onPress={async () => {
-							const hasDeleted = await this.props.deleteUser(user);
-							if (hasDeleted) {
-								navigation.goBack();
-							}
-						}} />
-				</View> */}
-			</ScrollView>
+			</View>
 		)
 	}
 }
 
-export default connect(null, { deleteUser })(UserDetailPage);
+const styles = StyleSheet.create({
+	marginTop: {
+		marginTop: 5,
+	},
+	marginBottom: {
+		marginBottom: 5,
+	},
+	view: {
+		width: '100%',
+		height: '100%',
+	}
+})
+
+const mapStateToProps = state => {
+	const { workout } = state;
+	if (workout === null) {
+		return { workout }
+	}
+	const keys = Object.keys(workout);
+	const workoutWithKeys = keys.map(id => {
+		return { ...workout[id], id }
+	});
+	return { workout: workoutWithKeys };
+}
+
+export default connect(mapStateToProps, { watchWorkoutUser }) (UserDetailPage);

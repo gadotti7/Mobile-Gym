@@ -8,11 +8,10 @@ const setUser = user => ({
 });
 
 export const watchUser = () => {
-	const { currentUser } = firebase.auth();
 	return dispatch => {
 		firebase
 			.database()
-			.ref(`/users/${currentUser.uid}/user`)
+			.ref(`/users`)
 			.on('value', snapshot => {
 				const user = snapshot.val();
 
@@ -45,7 +44,7 @@ export const deleteUser = user => {
 						try {
 							await firebase
 								.database()
-								.ref(`/users/${currentUser.uid}/users/${user.id}`)
+								.ref(`/users/${currentUser.uid}`)
 								.remove();
 							resolve(true);
 						} catch(e) {

@@ -15,13 +15,16 @@ export const saveUser = user => {
 	return async dispatch => {
 		const db = firebase.database();
 		if (user.id) {
-			await db.ref(`/users/${currentUser.uid}/users/${user.id}`)
+			await db.ref(`/users/`)
 				.set(user);
-		} else {
-			await db.ref(`/users/${currentUser.uid}/users`)
+		}
+		else {
+			await db.ref(`/users/`)
 				.push(user);
 		}
-
-		dispatch(userSavedSuccess())
+		await firebase
+			.auth()
+			.createUserWithEmailAndPassword(user.email, user.password)
+			dispatch(userSavedSuccess())
 	}
 }

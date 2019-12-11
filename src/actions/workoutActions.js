@@ -26,6 +26,24 @@ export const watchWorkout = () => {
 	}
 }
 
+export const watchWorkoutUser = ( user ) => {
+	return dispatch => {
+		firebase
+			.database()
+			.ref(`/users/${user.id}/workouts`)
+			.on('value', snapshot => {
+				const workout = snapshot.val();
+
+				if (!workout) {
+					return dispatch(setWorkout({}))
+				}
+
+				const action = setWorkout(workout);
+				dispatch(action)
+			});
+	}
+}
+
 export const deleteWorkout = workout => {
 	return dispatch => {
 		return new Promise((resolve, reject) => {
@@ -41,7 +59,6 @@ export const deleteWorkout = workout => {
 				},{
 					text: 'Sim',
 					onPress: async () => {
-						const { currentUser } = firebase.auth();
 						try {
 							await firebase
 								.database()

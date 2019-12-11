@@ -4,11 +4,14 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 
 import LoginPage from './pages/Login/LoginPage';
-import WorkoutPage from './pages/Workout/WorkoutPage';
-import WorkoutDetailPage from './pages/Workout/WorkoutDetailPage';
-import WorkoutFormPage from './pages/Workout/WorkoutFormPage';
+import WorkoutPage from './pages/UserViews/Workout/WorkoutPage';
+import WorkoutDetailPage from './pages/UserViews/Workout/WorkoutDetailPage';
+import WorkoutFormPage from './pages/UserViews/Workout/WorkoutFormPage';
 import UserFormPage from './pages/User/UserFormPage';
 import UserPage from './pages/User/UserPage';
+import UserDetailPage from "./pages/User/UserDetailPage";
+import WorkoutDetailAdm from './pages/User/WorkoutDetailAdm';
+import ExerciceFormPage from './pages/Exercice/ExerciceFormPage';
 
 const AppNavigator = createStackNavigator({
   'Login': {
@@ -48,6 +51,21 @@ const AppNavigator = createStackNavigator({
   'UserForm': {
         screen: UserFormPage,
   },
+  'UserDetail': {
+    screen: UserDetailPage,
+},
+'WorkoutDetailAdm': {
+    screen: WorkoutDetailAdm,
+    navigationOptions: ({ navigation }) => {
+        const { workout } = navigation.state.params;
+        return {
+            title: workout.name
+        }
+    }
+},
+ 'ExerciceForm':{
+     screen: ExerciceFormPage,
+ }
 }, {
     headerLayoutPreset: 'center',
     defaultNavigationOptions: {
@@ -56,7 +74,7 @@ const AppNavigator = createStackNavigator({
         headerStyle:{
             backgroundColor: '#ff0048',
         }
-    } 
+    }
 });
 
 export default createAppContainer(AppNavigator);

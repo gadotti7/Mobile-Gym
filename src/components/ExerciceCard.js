@@ -8,7 +8,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-const UserCard = ({ user, isFirstColumn, onPress }) => (
+const ExerciceCard = ({ exercice, isFirstColumn, onPress }) => (
     <TouchableOpacity 
     onPress={onPress}    
     style={[
@@ -16,26 +16,13 @@ const UserCard = ({ user, isFirstColumn, onPress }) => (
             isFirstColumn ? styles.firstColumn : styles.lastColumn
         ]}>
 		<View style={styles.card}>
-
-            {
-            user.img64
-                ? <Image
-                    source={{
-                        uri: `data:image/jpeg;base64,${user.img64}`
-                    }}
-                    aspectRatio={1}
-                    resizeMode="stretch"
-                />
-                : <Image
-                    style={{flex: 1 ,width: null, height: null}}
-                    source={ require('../assests/userPhoto.png') } 
-                    aspectRatio={1}
-                    resizeMode="stretch"
-                />
-            }
-
+            <Image
+                style={{flex: 1 ,width: null, height: null}}
+                source={ require('../assests/imageWorkout.png') } 
+                resizeMode="stretch"
+            />
             <View style={styles.cardTitleWrapper}>
-                <Text style={styles.cardTitle}>{user.email}</Text>
+                <Text style={styles.cardTitle}>{exercice.name}</Text>
             </View>
 
         </View>
@@ -83,4 +70,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default UserCard;
+export default ExerciceCard;
