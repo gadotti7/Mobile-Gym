@@ -11,7 +11,7 @@ import UserCard from '../../components/UserCard';
 import { FloatingAction } from "react-native-floating-action";
 
 import { connect } from 'react-redux';
-import { watchUser } from '../../actions';
+import { watchUser, deleteUser } from '../../actions';
 
 const actions = [
 	{
@@ -40,6 +40,7 @@ class UserPage extends React.Component {
 						<UserCard
 							user={item}
 								onPress={() => navigation.navigate('UserDetail', { user: item })}
+								onLongPress={async () => {await this.props.deleteUser(item)}} 
 							/>
 					)}
 					keyExtractor={item => item.id}
@@ -88,5 +89,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ watchUser }
+	{ watchUser, deleteUser }
 )(UserPage);

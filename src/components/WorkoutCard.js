@@ -10,9 +10,10 @@ import {
 
 
 
-const WorkoutCard = ({ workout, isFirstColumn, onPress }) => (
+const WorkoutCard = ({ workout, isFirstColumn, onPress,onLongPress }) => (
     <TouchableOpacity 
-    onPress={onPress}    
+    onPress={onPress}
+    onLongPress={onLongPress}
     style={[
             styles.container,
             isFirstColumn ? styles.firstColumn : styles.lastColumn

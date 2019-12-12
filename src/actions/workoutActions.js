@@ -44,7 +44,7 @@ export const watchWorkoutUser = ( user ) => {
 	}
 }
 
-export const deleteWorkout = workout => {
+export const deleteWorkout = (user,workout) => {
 	return dispatch => {
 		return new Promise((resolve, reject) => {
 			Alert.alert(
@@ -62,7 +62,7 @@ export const deleteWorkout = workout => {
 						try {
 							await firebase
 								.database()
-								.ref(`/users/${currentUser.uid}/workouts/${workout.id}`)
+								.ref(`/users/${user.id}/workouts/${workout.id}`)
 								.remove();
 							resolve(true);
 						} catch(e) {

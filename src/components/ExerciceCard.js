@@ -8,9 +8,10 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-const ExerciceCard = ({ exercice, isFirstColumn, onPress }) => (
+const ExerciceCard = ({ exercice, isFirstColumn, onPress, onLongPress }) => (
     <TouchableOpacity 
     onPress={onPress}    
+    onLongPress={onLongPress}
     style={[
             styles.container,
             isFirstColumn ? styles.firstColumn : styles.lastColumn

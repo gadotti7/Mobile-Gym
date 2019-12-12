@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
-import { watchWorkoutUser } from '../../actions';
+import { watchWorkoutUser,deleteWorkout } from '../../actions';
 import { FloatingAction } from "react-native-floating-action";
 
 import WorkoutCard from '../../components/WorkoutCard';
@@ -45,9 +45,8 @@ class UserDetailPage extends React.Component {
 						<WorkoutCard
 							workout={item}
 								onPress={() => navigation.navigate('WorkoutDetailAdm', { workout: item, user })}
-								// TODO colocar pra excluir 
-								//onLongPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
-							/>
+								onLongPress={async () => {await this.props.deleteWorkout(user, item)}} 
+						/>
 					)}
 					keyExtractor={item => item.id}
 					numColumns={2}
@@ -94,4 +93,4 @@ const mapStateToProps = state => {
 	return { workout: workoutWithKeys };
 }
 
-export default connect(mapStateToProps, { watchWorkoutUser }) (UserDetailPage);
+export default connect(mapStateToProps, { watchWorkoutUser, deleteWorkout }) (UserDetailPage);

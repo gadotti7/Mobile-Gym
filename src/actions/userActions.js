@@ -30,7 +30,7 @@ export const deleteUser = user => {
 		return new Promise((resolve, reject) => {
 			Alert.alert(
 				'Deletar',
-				`Deseja deletar a user ${user.name}`,
+				`Deseja deletar o usuário ${user.name}`,
 				[{
 					text: 'Não',
 					onPress: () => {
@@ -40,11 +40,10 @@ export const deleteUser = user => {
 				},{
 					text: 'Sim',
 					onPress: async () => {
-						const { currentUser } = firebase.auth();
 						try {
 							await firebase
 								.database()
-								.ref(`/users/${currentUser.uid}`)
+								.ref(`/users/${user.id}`)
 								.remove();
 							resolve(true);
 						} catch(e) {
