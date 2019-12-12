@@ -16,11 +16,23 @@ const ExerciceCard = ({ exercice, isFirstColumn, onPress }) => (
             isFirstColumn ? styles.firstColumn : styles.lastColumn
         ]}>
 		<View style={styles.card}>
-            <Image
-                style={{flex: 1 ,width: null, height: null}}
-                source={ require('../assests/imageWorkout.png') } 
-                resizeMode="stretch"
-            />
+            
+            {
+                exercice.img64
+                ? <Image
+                    source={{
+                        uri: `data:image/jpeg;base64,${exercice.img64}`
+                    }}
+                    aspectRatio={1}
+                    resizeMode="stretch"
+                />
+                : <Image
+                    style={{flex: 1 ,width: null, height: null}}
+                    source={ require('../assests/imageWorkout.png') } 
+                    resizeMode="stretch"
+                />
+            }
+
             <View style={styles.cardTitleWrapper}>
                 <Text style={styles.cardTitle}>{exercice.name}</Text>
             </View>

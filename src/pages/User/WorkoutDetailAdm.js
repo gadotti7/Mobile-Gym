@@ -21,7 +21,6 @@ class WorkoutDetailAdm extends React.Component {
 	componentDidMount() {
 		const { navigation } = this.props;
 		const { user } = navigation.state.params
-		console.log(user.id)
 		this.props.watchExerciceUser(user.id);
 	}
 
@@ -47,7 +46,7 @@ class WorkoutDetailAdm extends React.Component {
 					renderItem={({ item }) => (
 						<ExerciceCard
 							exercice={item}
-								onPress={() => navigation.navigate('WorkoutDetailAdm', { exercice: item, user })}
+								onPress={() => navigation.navigate('ExerciceDetail', { exercice: item })}
 								// TODO colocar pra excluir 
 								//onLongPress={() => navigation.navigate('WorkoutDetail', { workout: item })}
 							/>

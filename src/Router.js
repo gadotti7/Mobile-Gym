@@ -12,6 +12,7 @@ import UserPage from './pages/User/UserPage';
 import UserDetailPage from "./pages/User/UserDetailPage";
 import WorkoutDetailAdm from './pages/User/WorkoutDetailAdm';
 import ExerciceFormPage from './pages/Exercice/ExerciceFormPage';
+import ExercicePage from "./pages/Exercice/ExercicePage";
 
 const AppNavigator = createStackNavigator({
   'Login': {
@@ -65,6 +66,9 @@ const AppNavigator = createStackNavigator({
 },
  'ExerciceForm':{
      screen: ExerciceFormPage,
+ },
+ 'ExerciceDetail':{
+     screen: ExercicePage,
  }
 }, {
     headerLayoutPreset: 'center',

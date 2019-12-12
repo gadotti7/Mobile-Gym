@@ -61,7 +61,7 @@ export const Card = styled.View`
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  height: 150px;
+  height: 100px;
   elevation: 1;
   box-shadow: 20px 25px;
 `;
