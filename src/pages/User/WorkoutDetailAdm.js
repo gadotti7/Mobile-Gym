@@ -21,7 +21,8 @@ class WorkoutDetailAdm extends React.Component {
 	componentDidMount() {
 		const { navigation } = this.props;
 		const { user } = navigation.state.params
-		this.props.watchExerciceUser(user.id);
+		const { workout } = navigation.state.params
+		this.props.watchExerciceUser(workout.id,user.id);
 	}
 
 	render() {

@@ -6,13 +6,14 @@ const setExercice = exercice => ({
 	exercice,
 });
 
-export const watchExerciceUser = ( userID) => {
+export const watchExerciceUser = ( workoutID ,userID ) => {
 	return dispatch => {
 		firebase
 			.database()
-			.ref(`/users/${userID}/exercices`)
+			.ref(`/users/${userID}/workouts/${workoutID}/exercices`)
 			.on('value', snapshot => {
 				const exercice = snapshot.val();
+
 				if (!exercice) {
 					return dispatch(setExercice({}))
 				}
